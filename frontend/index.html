@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VayuGuard - AI Income Protection</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00629d",
+              "inverse-on-surface": "#eff1f2",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#001d34",
+              "surface-variant": "#e1e3e4",
+              "outline": "#707882",
+              "surface-tint": "#00629d",
+              "surface-container-high": "#e6e8e9",
+              "tertiary": "#136964",
+              "surface": "#f8fafb",
+              "on-tertiary-fixed": "#00201e",
+              "on-primary-fixed-variant": "#004a78",
+              "tertiary-container": "#61aca5",
+              "primary-container": "#42a5f5",
+              "on-secondary-fixed": "#00201d",
+              "error-container": "#ffdad6",
+              "inverse-primary": "#99cbff",
+              "primary-fixed": "#cfe5ff",
+              "on-primary-container": "#00395e",
+              "on-secondary-fixed-variant": "#005049",
+              "background": "#f8fafb",
+              "surface-container-highest": "#e1e3e4",
+              "surface-container-low": "#f2f4f5",
+              "on-secondary": "#ffffff",
+              "on-surface-variant": "#404751",
+              "on-tertiary-container": "#003e3a",
+              "secondary-container": "#81f3e5",
+              "on-background": "#191c1d",
+              "on-tertiary": "#ffffff",
+              "inverse-surface": "#2e3132",
+              "on-tertiary-fixed-variant": "#00504b",
+              "secondary-fixed": "#84f5e8",
+              "on-surface": "#191c1d",
+              "surface-dim": "#d8dadb",
+              "surface-bright": "#f8fafb",
+              "error": "#ba1a1a",
+              "secondary": "#006a62",
+              "on-error-container": "#93000a",
+              "secondary-fixed-dim": "#66d9cc",
+              "on-secondary-container": "#006f66",
+              "on-error": "#ffffff",
+              "tertiary-fixed": "#a4f0e9",
+              "tertiary-fixed-dim": "#89d4cd",
+              "outline-variant": "#bfc7d3",
+              "primary-fixed-dim": "#99cbff",
+              "surface-container": "#eceeef",
+              "surface-container-lowest": "#ffffff"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        body { min-height: max(884px, 100dvh); background-color: #f8fafb; }
+        .page { display: none; }
+        .page.active { display: block; }
+        
+        .camera-viewfinder {
+            position: relative;
+            aspect-ratio: 4/5;
+            background: #191c1d;
+            border-radius: 2rem;
+            overflow: hidden;
+        }
+        .viewfinder-corner {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border-color: rgba(255, 255, 255, 0.6);
+            border-style: solid;
+        }
+        .corner-tl { top: 24px; left: 24px; border-width: 3px 0 0 3px; border-top-left-radius: 12px; }
+        .corner-tr { top: 24px; right: 24px; border-width: 3px 3px 0 0; border-top-right-radius: 12px; }
+        .corner-bl { bottom: 24px; left: 24px; border-width: 0 0 3px 3px; border-bottom-left-radius: 12px; }
+        .corner-br { bottom: 24px; right: 24px; border-width: 0 3px 3px 0; border-bottom-right-radius: 12px; }
+        
+        /* Smooth fade animations */
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen">
+<script type="module" src="/src/main.js"></script>
+<div id="home_dashboard" class="page fade-in">
+
+<!-- Top Navigation Bar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] sticky top-0 z-50 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 active:scale-95 duration-200 cursor-pointer" data-icon="menu">menu</span>
+<h1 class="font-['Manrope'] font-extrabold text-sky-800 dark:text-sky-200 tracking-tighter text-xl">VayuGuard</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Manrope'] font-bold text-lg tracking-tight text-sky-700 dark:text-sky-400" href="#">Home</a>
+<a class="font-['Manrope'] font-bold text-lg tracking-tight text-slate-500 dark:text-slate-400 hover:opacity-80 transition-opacity" href="#">Coverage</a>
+<a class="font-['Manrope'] font-bold text-lg tracking-tight text-slate-500 dark:text-slate-400 hover:opacity-80 transition-opacity" href="#">Claims</a>
+</div>
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 active:scale-95 duration-200 cursor-pointer" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 py-10 space-y-10">
+<!-- Hero Alert Banner -->
+<section class="space-y-4">
+<div class="bg-primary-container/10 border-l-4 border-primary rounded-xl p-5 flex items-start gap-4 shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="thunderstorm" style="font-variation-settings: 'FILL' 1;">thunderstorm</span>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-on-primary-container text-lg">Heavy rain detected</h3>
+<p class="text-on-surface-variant text-sm mt-1">Automatic protection active. Your earnings are secured for the next 4 hours in Mumbai Central.</p>
+</div>
+<button class="text-primary font-bold text-sm bg-white px-4 py-2 rounded-full shadow-sm hover:opacity-80 active:scale-95 transition-all">Dismiss</button>
+</div>
+</section>
+<!-- Bento Grid Dashboard -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Main Earnings Card -->
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl text-primary" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div class="relative z-10">
+<p class="text-on-surface-variant font-label text-sm uppercase tracking-widest mb-2">Weekly Earnings</p>
+<h2 class="font-headline text-5xl font-bold text-on-background tracking-tight">₹14,580.00</h2>
+<div class="mt-8 flex items-end gap-2 h-32">
+<!-- Simple Pure-CSS Graph -->
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[40%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[80%] transition-all"></div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[60%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[70%] transition-all"></div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[90%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[95%] transition-all"></div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[75%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[60%] transition-all"></div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[50%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[85%] transition-all"></div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[100%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[90%] transition-all"></div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-t-lg h-[65%] relative group/bar">
+<div class="absolute bottom-0 w-full bg-primary-container rounded-t-lg h-[75%] transition-all"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] font-label text-outline uppercase tracking-widest px-1">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Status Side Cards -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<!-- Protection Status -->
+<div class="flex-1 bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start">
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Active Coverage</p>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label text-[10px] font-bold">ACTIVE</span>
+</div>
+<h4 class="font-headline text-2xl font-bold mt-4 text-primary">₹8,400.00</h4>
+<p class="text-outline text-xs mt-1">Protected Income Pool</p>
+</div>
+<div class="mt-4 pt-4 border-t border-outline/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="verified_user">verified_user</span>
+<span class="text-tertiary text-xs font-bold">Premium Shield Enabled</span>
+</div>
+</div>
+<!-- Trust Score -->
+<div class="flex-1 bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)]">
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest">Trust Score</p>
+<div class="flex items-center gap-4 mt-4">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-container-high" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-tertiary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="17.6" stroke-width="6"></circle>
+</svg>
+<span class="absolute font-headline font-bold text-on-background">92</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-background text-lg leading-tight">Elite Tier</p>
+<p class="text-outline text-xs mt-0.5">Top 5% of earners</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contextual Secondary Section -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div class="space-y-6">
+<h3 class="font-headline text-2xl font-bold text-on-background">Secure Your Earnings</h3>
+<p class="text-on-surface-variant leading-relaxed">VayuGuard automatically compensates you when weather or platform downtime affects your daily targets. Your income is no longer at the mercy of the elements.</p>
+<div class="flex gap-4">
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-8 py-4 rounded-xl font-headline font-bold text-base shadow-lg active:scale-95 transition-all">View Policy Details</button>
+<button class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-headline font-bold text-base hover:bg-surface-dim active:scale-95 transition-all">Support</button>
+</div>
+</div>
+<div class="bg-white/40 p-1 rounded-xl glass-effect shadow-xl">
+<img class="w-full h-64 object-cover rounded-xl grayscale-[0.3] brightness-90" data-alt="Abstract visualization of weather patterns and safe zones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtVZ2FLG-F5zFpZGqRB73FplRPiy3aL_XnuK9Pu1SVlLBpf94SHWfho4M3DpzbiPZhVKDex9BpIpDi5rt_iR33xyuUHGjkkBLrl_lweP0NDcL10BrXsYnkxQilBxBBdEROsRUx7scRSxF-Y-uiCu9q3KVtI9Og_tFa8YathOBrVxKZsiL24UKe5mk6qjmic2h3ngEAu9htK2m73C1ao3o-spZSUPR4nszyhhkrNI08sKaH_NlTij9Ez7U4DEMuuU0OqlNpU1AxsVA"/>
+</div>
+</section>
+<!-- Verification Alert -->
+<section class="bg-error-container/30 rounded-xl p-6 border-2 border-dashed border-error/20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-background">Verification required</h4>
+<p class="text-on-surface-variant text-sm">Please update your ID to maintain coverage status.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-on-surface" data-icon="chevron_right">chevron_right</span>
+</section>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-28 right-6 w-16 h-16 bg-primary text-on-primary rounded-2xl shadow-2xl flex items-center justify-center active:scale-90 transition-transform duration-150 z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="add_shield" style="font-variation-settings: 'FILL' 1;">shield</span>
+</button>
+<!-- Bottom Navigation Bar -->
+
+
+</div>
+<div id="claims_status" class="page fade-in">
+
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl docked full-width top-0 sticky z-50 no-border tonal-layering shadow-[0_12px_32px_rgba(0,98,157,0.06)] flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 cursor-pointer active:scale-95 duration-200">menu</span>
+<h1 class="font-['Manrope'] font-extrabold text-sky-800 dark:text-sky-200 tracking-tighter text-lg">VayuGuard</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 cursor-pointer active:scale-95 duration-200">notifications</span>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 py-10 space-y-10 pb-32">
+<!-- Hero Section: Current Disruption -->
+<section class="space-y-4">
+<div class="flex items-end justify-between">
+<div>
+<h2 class="font-headline text-on-surface-variant text-sm font-semibold tracking-wide uppercase">Active Climate Status</h2>
+<p class="font-headline text-3xl font-bold text-on-surface tracking-tight">Heavy Rainfall</p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shield</span>
+                    Coverage Active
+                </div>
+</div>
+<!-- Bento Status Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_12px_32px_rgba(0,98,157,0.04)] flex flex-col justify-between aspect-square md:aspect-auto md:h-40">
+<div class="h-12 w-12 rounded-2xl bg-blue-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">rainy</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-medium">Precipitation</p>
+<p class="text-2xl font-bold font-headline text-primary">12mm/hr</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-[0_12px_32px_rgba(0,98,157,0.04)] flex flex-col justify-between aspect-square md:aspect-auto md:h-40">
+<div class="h-12 w-12 rounded-2xl bg-orange-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-500 text-3xl">thermostat</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-xs font-medium">Temperature</p>
+<p class="text-2xl font-bold font-headline text-orange-600">22°C</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Claim Status Card -->
+<section class="space-y-6">
+<div class="bg-surface-container-lowest rounded-[2rem] p-8 shadow-[0_16px_48px_rgba(0,98,157,0.08)] relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8">
+<div class="bg-sky-100 text-sky-800 px-4 py-2 rounded-2xl font-label text-[10px] font-bold uppercase tracking-[0.15em]">
+                        Processing
+                    </div>
+</div>
+<div class="mb-10">
+<h3 class="font-headline text-2xl font-bold mb-2">Claim #VG-88291</h3>
+<p class="text-on-surface-variant text-sm font-body">Rainfall disruption detected on Nov 14, 2023</p>
+</div>
+<!-- Timeline UI -->
+<div class="relative space-y-12 before:absolute before:left-[19px] before:top-2 before:h-[calc(100%-16px)] before:w-0.5 before:bg-surface-container-high">
+<!-- Step 1: Trigger -->
+<div class="relative flex gap-6 items-start">
+<div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-tertiary shadow-sm">
+<span class="material-symbols-outlined text-white text-xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="pt-1">
+<p class="font-headline font-bold text-on-surface">Trigger detected</p>
+<p class="text-on-surface-variant text-sm mt-1 leading-relaxed">System confirmed local rainfall exceeded 8mm/hr threshold at your delivery hub.</p>
+<span class="text-outline text-[11px] font-bold mt-2 inline-block">NOV 14 • 14:22</span>
+</div>
+</div>
+<!-- Step 2: Verification -->
+<div class="relative flex gap-6 items-start">
+<div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-container ring-4 ring-white">
+<span class="material-symbols-outlined text-on-primary-container text-xl animate-pulse">sync</span>
+</div>
+<div class="pt-1">
+<p class="font-headline font-bold text-on-surface">Verification step</p>
+<p class="text-on-surface-variant text-sm mt-1 leading-relaxed">Authenticating shift logs and active delivery window. Currently 85% complete.</p>
+<span class="text-primary text-[11px] font-bold mt-2 inline-block">IN PROGRESS</span>
+</div>
+</div>
+<!-- Step 3: Decision -->
+<div class="relative flex gap-6 items-start opacity-40">
+<div class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-surface-container-high ring-4 ring-white">
+<span class="material-symbols-outlined text-outline text-xl">account_balance_wallet</span>
+</div>
+<div class="pt-1">
+<p class="font-headline font-bold text-on-surface">Decision &amp; Payout</p>
+<p class="text-on-surface-variant text-sm mt-1 leading-relaxed">Instant transfer to your linked wallet once verification is finalized.</p>
+<span class="text-outline text-[11px] font-bold mt-2 inline-block">ESTIMATED 2 HOURS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Secondary Information / History -->
+<section class="space-y-4">
+<h2 class="font-headline text-xl font-bold px-2">Recent Disruption History</h2>
+<div class="space-y-3">
+<div class="bg-surface-container-low p-5 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-xl bg-green-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-700">heat</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">Heatwave Level 2</p>
+<p class="text-on-surface-variant text-xs font-medium">Nov 08, 2023</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-tertiary font-bold text-sm">+$14.50</p>
+<p class="text-[10px] text-outline font-bold uppercase tracking-wider">Approved</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-xl bg-error-container/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-error">air</span>
+</div>
+<div>
+<p class="font-bold text-on-surface text-sm">High Pollution (AQI 350+)</p>
+<p class="text-on-surface-variant text-xs font-medium">Oct 29, 2023</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-error font-bold text-sm">$0.00</p>
+<p class="text-[10px] text-error font-bold uppercase tracking-wider">Flagged</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+
+
+</div>
+<div id="verification_camera" class="page fade-in">
+
+<!-- Top Navigation Anchor -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] sticky top-0 z-50 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-3">
+<button class="active:scale-95 duration-200 text-slate-500 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Manrope'] font-extrabold text-sky-800 dark:text-sky-200 tracking-tighter text-lg">VayuGuard</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700">help_outline</span>
+</div>
+</header>
+<main class="max-w-md mx-auto px-6 pt-6 pb-24">
+<!-- Instructional Header -->
+<section class="mb-8">
+<h2 class="font-headline text-headline-md text-on-background mb-2">Live Verification</h2>
+<p class="text-on-surface-variant font-body text-body-md">Position your asset within the frame to start coverage validation.</p>
+</section>
+<!-- Camera Viewport Section -->
+<section class="mb-10 relative">
+<div class="camera-viewfinder shadow-xl">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;q=80&amp;w=800')] bg-cover bg-center opacity-70" data-alt="Electronic circuit board in close up view"></div>
+<!-- Viewfinder UI Overlays -->
+<div class="viewfinder-corner corner-tl"></div>
+<div class="viewfinder-corner corner-tr"></div>
+<div class="viewfinder-corner corner-bl"></div>
+<div class="viewfinder-corner corner-br"></div>
+<!-- Live Status Indicators -->
+<div class="absolute top-8 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="text-white text-[11px] font-semibold uppercase tracking-widest">Live View</span>
+</div>
+<!-- Dynamic Hint Overlay -->
+<div class="absolute bottom-12 left-6 right-6 text-center">
+<p class="text-white font-medium text-sm drop-shadow-md bg-black/20 backdrop-blur-sm rounded-lg py-3 px-4">
+                        Show surroundings and move camera slowly
+                    </p>
+</div>
+</div>
+</section>
+<!-- Status and Progress Section -->
+<section class="mb-10">
+<div class="bg-surface-container-low rounded-xl p-5 mb-6">
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">cloud_upload</span>
+<span class="font-headline font-bold text-sm text-on-surface">Analyzing...</span>
+</div>
+<span class="text-primary font-bold text-sm">64%</span>
+</div>
+<!-- Progress Bar -->
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[64%] bg-gradient-to-r from-primary to-primary-container rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Primary Action Cluster -->
+<section class="grid grid-cols-1 gap-4">
+<button class="bg-gradient-to-r from-primary to-primary-container text-white h-[64px] rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 shadow-lg active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videocam</span>
+                Record Video
+            </button>
+<button class="bg-surface-container-high text-on-surface h-[64px] rounded-xl font-headline font-bold text-lg flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">photo_camera</span>
+                Capture Photo
+            </button>
+</section>
+<!-- Secondary Information / Guidance -->
+<div class="mt-8 flex items-start gap-4 p-4 bg-secondary-container/20 rounded-xl">
+<span class="material-symbols-outlined text-secondary">info</span>
+<div class="flex-1">
+<h4 class="text-sm font-bold text-on-secondary-container mb-1">Why do we need this?</h4>
+<p class="text-xs text-on-secondary-container leading-relaxed opacity-80">Verification ensures your policy starts instantly and accurately captures the condition of your assets for faster claims processing.</p>
+</div>
+</div>
+</main>
+<!-- Navigation Shell Logic (Suppressed for focused task) -->
+<!-- The BottomNavBar is excluded per instructions for Focused Journey screens -->
+
+</div>
+<div id="trust_score_breakdown" class="page fade-in">
+
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] sticky top-0 z-50 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 active:scale-95 duration-200 transition-opacity hover:opacity-80 cursor-pointer" data-icon="menu">menu</span>
+<h1 class="font-['Manrope'] font-extrabold text-sky-800 dark:text-sky-200 tracking-tighter text-lg">VayuGuard</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 active:scale-95 duration-200 transition-opacity hover:opacity-80 cursor-pointer" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="px-6 pt-8 max-w-2xl mx-auto space-y-10">
+<!-- Hero Section: Overall Score -->
+<section class="text-center space-y-6">
+<div class="inline-flex flex-col items-center justify-center relative p-8">
+<!-- Outer Ring Glow -->
+<div class="absolute inset-0 bg-secondary-container/20 rounded-full blur-3xl"></div>
+<!-- Circular Score Indicator -->
+<div class="relative w-48 h-48 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary transition-all duration-1000" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="82.93" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline text-5xl font-bold tracking-tight text-on-surface">85</span>
+<span class="font-label text-xs font-semibold tracking-widest uppercase text-on-surface-variant">Trust Score</span>
+</div>
+</div>
+<div class="mt-6">
+<div class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-full font-bold text-sm tracking-wide flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        HIGHLY SECURE
+                    </div>
+</div>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline text-2xl font-semibold text-on-background">Your identity is well-guarded.</h2>
+<p class="text-on-surface-variant max-w-md mx-auto leading-relaxed">VayuGuard analyzes signals from your hardware and network to ensure a premium security posture.</p>
+</div>
+</section>
+<!-- Bento Grid Breakdown -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Location Trust -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.04)] space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">Location Trust</span>
+</div>
+<span class="font-headline font-bold text-primary">92%</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[92%]"></div>
+</div>
+<p class="text-[12px] text-on-surface-variant font-body">Current location matches historical patterns and verified safe zones.</p>
+</div>
+<!-- Behavior Trust -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.04)] space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" data-icon="gesture">gesture</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">Behavior Trust</span>
+</div>
+<span class="font-headline font-bold text-tertiary">88%</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full w-[88%]"></div>
+</div>
+<p class="text-[12px] text-on-surface-variant font-body">Interaction speed and biometric inputs align with your digital fingerprint.</p>
+</div>
+<!-- Network Trust -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.04)] space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary" data-icon="vpn_lock">vpn_lock</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">Network Trust</span>
+</div>
+<span class="font-headline font-bold text-secondary">74%</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full w-[74%]"></div>
+</div>
+<p class="text-[12px] text-on-surface-variant font-body">No VPN detected. Moderate risk found on current public Wi-Fi node.</p>
+</div>
+<!-- Verification Score -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.04)] space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="fingerprint">fingerprint</span>
+</div>
+<span class="font-headline font-semibold text-on-surface">Verification</span>
+</div>
+<span class="font-headline font-bold text-on-primary-container">100%</span>
+</div>
+<div class="h-2 bg-surface-container-low rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full w-[100%]"></div>
+</div>
+<p class="text-[12px] text-on-surface-variant font-body">Multi-factor authentication and device binding are fully active.</p>
+</div>
+</section>
+<!-- Improvement Suggestions -->
+<section class="space-y-6">
+<h3 class="font-headline text-lg font-bold text-on-background px-2">Path to 100% Trust</h3>
+<div class="space-y-3">
+<!-- Suggestion 1 -->
+<div class="group flex items-center gap-4 p-5 bg-white rounded-2xl hover:bg-primary-container/5 transition-colors duration-300">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="wifi_off">wifi_off</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-headline font-bold text-sm text-on-surface">Switch to Private Network</h4>
+<p class="text-xs text-on-surface-variant">Public Wi-Fi lowers your network integrity score.</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Suggestion 2 -->
+<div class="group flex items-center gap-4 p-5 bg-white rounded-2xl hover:bg-primary-container/5 transition-colors duration-300">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="update">update</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-headline font-bold text-sm text-on-surface">Security Update</h4>
+<p class="text-xs text-on-surface-variant">Update VayuGuard to the latest version (v2.4.1).</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Info Card -->
+<section class="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="info">info</span>
+<div class="space-y-1">
+<p class="text-sm font-semibold text-primary">How is this calculated?</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">Your Trust Score is a dynamic metric generated every 15 minutes based on real-time signal analysis. High scores enable lower insurance premiums and faster claim approvals.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+
+
+</div>
+<div id="coverage_details" class="page fade-in">
+
+<!-- Top App Bar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] sticky top-0 z-50 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 active:scale-95 duration-200 cursor-pointer">menu</span>
+<h1 class="font-['Manrope'] font-extrabold text-sky-800 dark:text-sky-200 tracking-tighter text-lg">VayuGuard</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 active:scale-95 duration-200 cursor-pointer">notifications</span>
+</div>
+</header>
+<main class="px-6 pt-8 max-w-2xl mx-auto space-y-10">
+<!-- Coverage Status & Toggle Section -->
+<section class="space-y-6">
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<p class="font-label text-label-sm uppercase tracking-widest text-on-surface-variant">Current Status</p>
+<h2 class="font-headline text-3xl font-bold tracking-tight text-primary">Active Coverage</h2>
+</div>
+<div class="flex items-center gap-2 px-4 py-1.5 status-pill-active rounded-full font-label text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">shield</span>
+                    Secure
+                </div>
+</div>
+<!-- Bento-style Toggle Card -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-[0_12px_32px_rgba(0,98,157,0.06)] space-y-8">
+<div class="flex justify-between items-center">
+<div class="space-y-1">
+<p class="font-headline text-xl font-semibold text-on-surface">Coverage Shield</p>
+<p class="text-on-surface-variant text-sm">Toggle to pause or resume protection</p>
+</div>
+<!-- Custom Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-16 h-9 bg-surface-container-high rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-7 after:w-7 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Coverage Visualization (Gauge) -->
+<div class="flex items-center gap-6 py-4">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-container-high stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-tertiary stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="175.84" stroke-linecap="round" stroke-width="8"></circle> <!-- 30% of 251.2 -->
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline text-2xl font-bold text-tertiary">30%</span>
+<span class="font-label text-[10px] text-on-surface-variant font-semibold uppercase">Coverage</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<div class="space-y-1">
+<h4 class="font-headline text-lg font-semibold text-on-primary-container">Smart Protection</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Your income is protected up to 30% of the daily average on active days.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Billing & Plan Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Premium Card -->
+<div class="bg-primary-container/10 rounded-3xl p-6 flex flex-col justify-between min-h-[160px]">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-3 rounded-2xl">payments</span>
+<span class="font-label text-[10px] font-bold text-primary uppercase bg-white px-3 py-1 rounded-full">Weekly Premium</span>
+</div>
+<div class="mt-4">
+<p class="font-headline text-3xl font-bold text-on-primary-container">₹35.00</p>
+<p class="text-on-primary-container/60 text-xs font-medium mt-1">Deducted every Monday</p>
+</div>
+</div>
+<!-- Billing Cycle Card -->
+<div class="bg-surface-container-low rounded-3xl p-6 flex flex-col justify-between min-h-[160px]">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-tertiary bg-tertiary-container/20 p-3 rounded-2xl">event_repeat</span>
+<span class="font-label text-[10px] font-bold text-on-tertiary-container uppercase">Next Billing</span>
+</div>
+<div class="mt-4">
+<p class="font-headline text-xl font-bold text-on-surface">Oct 23, 2023</p>
+<div class="flex items-center gap-1.5 mt-2">
+<div class="w-1.5 h-1.5 bg-tertiary rounded-full"></div>
+<p class="text-on-surface-variant text-xs font-medium italic">5 days remaining</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Detailed Breakdown -->
+<section class="space-y-4">
+<h3 class="font-headline text-lg font-semibold px-2">Plan Highlights</h3>
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm">
+<div class="p-5 flex items-center gap-4 hover:bg-surface-container-low transition-colors duration-200">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-xl" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+<div class="flex-1">
+<p class="font-headline font-semibold text-on-surface">Accident Coverage</p>
+<p class="text-on-surface-variant text-sm">₹50,000 accidental medical expenses</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+<div class="p-5 flex items-center gap-4 hover:bg-surface-container-low transition-colors duration-200">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-xl" style="font-variation-settings: 'FILL' 1;">work_history</span>
+<div class="flex-1">
+<p class="font-headline font-semibold text-on-surface">Income Loss</p>
+<p class="text-on-surface-variant text-sm">Daily allowance for up to 15 days hospitalisation</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Trust Anchor -->
+<div class="flex flex-col items-center justify-center pt-4 pb-8 text-center space-y-3">
+<div class="bg-surface-container-high rounded-full px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-outline">verified_user</span>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-widest">Underwritten by GuardSafe General Insurance</span>
+</div>
+<p class="text-[10px] text-outline px-12 leading-relaxed">
+                Prices include all applicable taxes. Coverage terms and conditions apply. VayuGuard acts as a facilitator for these insurance services.
+            </p>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+
+
+</div>
+<div id="user_profile" class="page fade-in">
+
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] sticky top-0 z-50 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 hover:opacity-80 transition-opacity cursor-pointer active:scale-95 duration-200" data-icon="menu">menu</span>
+<h1 class="font-['Manrope'] font-extrabold text-sky-800 dark:text-sky-200 tracking-tighter text-lg">VayuGuard</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sky-700 dark:text-sky-400 hover:opacity-80 transition-opacity cursor-pointer active:scale-95 duration-200" data-icon="notifications">notifications</span>
+</div>
+</header>
+<main class="max-w-md mx-auto px-6 pt-8 pb-32">
+<!-- Profile Hero Section -->
+<section class="flex flex-col items-center mb-10">
+<div class="relative mb-4">
+<div class="w-32 h-32 rounded-full overflow-hidden border-4 border-surface-container-lowest shadow-xl">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a smiling delivery professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYXlcYPm7vq4LL0trLd-JEwhhqtuTc5rZJPsyNm-aZ2gMBuBfahXzaxOfoUM4eSX8HrOkLrgwrHzdKeBd-H6-ofNW8bS5f-sUQ2AV_UTHKwdc1gQozDmCilObMkSTB2dlDGOXEGe_XydzlSp_RvoMWTToQ36eTWuevnPEVq0OJlOlxjd8PVqT1KxUpP87IrGjOFp4-gryD2-gdq-0ScicabRrWSA2a1Xpm8WoUs4nf_IwV3yW5Oc8NGZI53ftBB2kB0fhkVWcUUYE"/>
+</div>
+<div class="absolute bottom-1 right-1 bg-secondary-container p-2 rounded-full shadow-lg border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-on-secondary-container text-xl" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">Arjun Sharma</h2>
+<div class="mt-2 flex items-center gap-2 bg-surface-container-low px-4 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="delivery_dining">delivery_dining</span>
+<span class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Zomato Gold Partner</span>
+</div>
+</section>
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-2 gap-4 mb-10">
+<div class="col-span-2 bg-surface-container-lowest p-6 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)]">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-1">Active Plan</p>
+<h3 class="font-headline text-xl font-bold text-primary">VayuShield Pro</h3>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">Active</span>
+</div>
+<div class="w-full bg-surface-container-low h-3 rounded-full mb-3 overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-primary-container h-full w-[85%] rounded-full"></div>
+</div>
+<div class="flex justify-between items-center text-xs font-medium text-on-surface-variant">
+<span>Weekly Coverage Cap</span>
+<span class="text-on-surface font-bold">₹12,500 / ₹15,000</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-tertiary" data-icon="receipt_long">receipt_long</span>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Total Claims</p>
+<p class="font-headline text-lg font-bold">12 Paid</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_12px_32px_rgba(0,98,157,0.06)] flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-primary" data-icon="calendar_today">calendar_today</span>
+<div>
+<p class="text-[10px] font-bold text-on-surface-variant uppercase tracking-wider">Renewal In</p>
+<p class="font-headline text-lg font-bold">4 Days</p>
+</div>
+</div>
+</div>
+<!-- Settings List -->
+<section class="space-y-2">
+<h4 class="font-headline text-sm font-bold text-on-surface-variant px-2 mb-4 uppercase tracking-widest">Account Settings</h4>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-fixed-variant" data-icon="person_outline">person_outline</span>
+</div>
+<span class="font-body font-semibold text-on-surface">Personal Information</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<span class="font-body font-semibold text-on-surface">Payout Settings</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="support_agent">support_agent</span>
+</div>
+<span class="font-body font-semibold text-on-surface">Help &amp; Support</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="security">security</span>
+</div>
+<span class="font-body font-semibold text-on-surface">Privacy Policy</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Logout Action -->
+<div class="mt-12 px-2">
+<button class="w-full flex items-center justify-center gap-3 p-4 bg-error-container text-on-error-container font-headline font-bold rounded-xl active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout Account
+            </button>
+<p class="text-center text-[10px] text-on-surface-variant mt-6 uppercase tracking-[0.2em]">VayuGuard v2.4.0 • Secure Session</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+
+
+</div>
+<div id="onboarding" class="page fade-in">
+
+<!-- Suppression Logic: TopAppBar and BottomNavBar are hidden for transactional onboarding flow -->
+<main class="max-w-md mx-auto min-h-screen flex flex-col px-6 pt-12 pb-10">
+<!-- Step Indicator -->
+<div class="flex gap-2 mb-10">
+<div class="h-1.5 flex-1 bg-primary rounded-full"></div>
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full"></div>
+<div class="h-1.5 flex-1 bg-surface-container-highest rounded-full"></div>
+</div>
+<!-- Illustration/Visual Anchor -->
+<div class="relative mb-8 aspect-video rounded-3xl overflow-hidden shadow-[0_12px_32px_rgba(0,98,157,0.06)]">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-tertiary-container/10"></div>
+<img class="w-full h-full object-cover mix-blend-overlay" data-alt="Modern abstract blue and teal architectural pattern representing security" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRCp70s9jFQmthbSgHvne2mAYgL_ac8Ht3-uKHK8Y58y551AjuDh2Ks92UXO7EB4Hufv9AwFEzF9uZwJtIa0jmkQYNRU6xHe8gg0blnyO_JUWro83AYGGxTmgnsTTxLtX2tZ2HbzznaPRbd74ix4VaTaNq5beDciyw8Y9ERp_Zm9KcKHewuxBQpvQhaPtCE4MPfPSirobBMRrrxDIVvgTefKKvuiUco9ApAAo3mzyhJQkO_15m029wKaQhjL15ZaXxSoc-5WcD_n8"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-xl">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+</div>
+</div>
+<!-- Content Header -->
+<div class="mb-10">
+<h1 class="font-headline font-bold text-3xl text-on-background tracking-tight leading-tight">
+                Secure Your <br/><span class="text-primary">Delivery Journey</span>
+</h1>
+<p class="text-on-surface-variant mt-3 font-body text-lg">
+                Enter your details to activate your coverage instantly.
+            </p>
+</div>
+<!-- Onboarding Flow Form -->
+<div class="space-y-8 flex-grow">
+<!-- Step 1: Identity (Phone/OTP Interface) -->
+<section class="space-y-4">
+<label class="block text-sm font-label font-bold uppercase tracking-widest text-primary">Verification</label>
+<div class="bg-surface-container-lowest p-6 rounded-[1.5rem] shadow-[0_8px_24px_rgba(0,98,157,0.04)]">
+<div class="flex gap-2">
+<input class="w-full h-14 bg-surface-container-low border-none rounded-xl text-center font-headline font-bold text-xl focus:ring-2 focus:ring-primary-container" maxlength="1" type="text" value="4"/>
+<input class="w-full h-14 bg-surface-container-low border-none rounded-xl text-center font-headline font-bold text-xl focus:ring-2 focus:ring-primary-container" maxlength="1" type="text" value="8"/>
+<input class="w-full h-14 bg-surface-container-low border-none rounded-xl text-center font-headline font-bold text-xl focus:ring-2 focus:ring-primary-container" maxlength="1" placeholder="·" type="text"/>
+<input class="w-full h-14 bg-surface-container-low border-none rounded-xl text-center font-headline font-bold text-xl focus:ring-2 focus:ring-primary-container" maxlength="1" placeholder="·" type="text"/>
+</div>
+<p class="mt-4 text-center text-sm text-on-surface-variant">
+                        We sent a code to +91 ••••• ••892
+                    </p>
+</div>
+</section>
+<!-- Step 2: Platform Selection (Bento Style Cards) -->
+<section class="space-y-4">
+<label class="block text-sm font-label font-bold uppercase tracking-widest text-primary">Primary Platform</label>
+<div class="grid grid-cols-2 gap-3">
+<!-- Zomato -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-lowest rounded-2xl border-2 border-primary-container transition-all active:scale-95 text-primary">
+<span class="material-symbols-outlined mb-2 text-2xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-body font-semibold text-sm">Zomato</span>
+</button>
+<!-- Swiggy -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-lowest rounded-2xl border-2 border-transparent hover:border-surface-variant transition-all active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined mb-2 text-2xl">delivery_dining</span>
+<span class="font-body font-semibold text-sm text-on-surface">Swiggy</span>
+</button>
+<!-- Zepto -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-lowest rounded-2xl border-2 border-transparent hover:border-surface-variant transition-all active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined mb-2 text-2xl">bolt</span>
+<span class="font-body font-semibold text-sm text-on-surface">Zepto</span>
+</button>
+<!-- Blinkit -->
+<button class="flex flex-col items-center justify-center p-4 bg-surface-container-lowest rounded-2xl border-2 border-transparent hover:border-surface-variant transition-all active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined mb-2 text-2xl">shopping_cart</span>
+<span class="font-body font-semibold text-sm text-on-surface">Blinkit</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Action Footer -->
+<div class="mt-10 space-y-4">
+<button class="w-full h-14 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-lg shadow-[0_12px_32px_rgba(0,98,157,0.2)] active:scale-[0.98] transition-transform">
+                Activate Protection
+            </button>
+<div class="flex items-center justify-center gap-2 py-2">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-xs font-label font-semibold text-on-tertiary-fixed-variant uppercase tracking-tighter">Powered by VayuGuard Enterprise</span>
+</div>
+</div>
+</main>
+<!-- Support Elements: Decorative Blobs for "Digital Sanctuary" feel -->
+<div class="fixed top-[-10%] right-[-10%] w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="fixed bottom-[-5%] left-[-10%] w-80 h-80 bg-primary-container/10 rounded-full blur-3xl -z-10"></div>
+
+</div>
+
+<!-- Common Bottom Nav -->
+<nav id="bottom-nav" class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_24px_rgba(0,98,157,0.04)] rounded-t-[1.5rem] z-[100]">
+<div onclick="navigate('home_dashboard')" class="nav-item flex flex-col items-center justify-center text-slate-500 hover:text-sky-600 px-5 py-2 transition-transform duration-150 cursor-pointer" id="nav-home_dashboard">
+    <span class="material-symbols-outlined" data-icon="home">home</span>
+    <span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-widest mt-1">Home</span>
+</div>
+<div onclick="navigate('coverage_details')" class="nav-item flex flex-col items-center justify-center text-slate-500 hover:text-sky-600 px-5 py-2 transition-transform duration-150 cursor-pointer" id="nav-coverage_details">
+    <span class="material-symbols-outlined" data-icon="shield">shield</span>
+    <span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-widest mt-1">Coverage</span>
+</div>
+<div onclick="navigate('claims_status')" class="nav-item flex flex-col items-center justify-center text-slate-500 hover:text-sky-600 px-5 py-2 transition-transform duration-150 cursor-pointer" id="nav-claims_status">
+    <span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+    <span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-widest mt-1">Claims</span>
+</div>
+<div onclick="navigate('user_profile')" class="nav-item flex flex-col items-center justify-center text-slate-500 hover:text-sky-600 px-5 py-2 transition-transform duration-150 cursor-pointer" id="nav-user_profile">
+    <span class="material-symbols-outlined" data-icon="person">person</span>
+    <span class="font-['Inter'] font-semibold text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</div>
+</nav>
+<script>
+    // Simple state machine for demo
+    window.navigate = function(pageId) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        if (document.getElementById(pageId)) {
+            document.getElementById(pageId).classList.add('active');
+        }
+        
+        // Update nav styling
+        document.querySelectorAll('.nav-item').forEach(el => {
+            el.className = "nav-item flex flex-col items-center justify-center text-slate-500 hover:text-sky-600 px-5 py-2 transition-transform duration-150 cursor-pointer";
+            if (el.id === 'nav-' + pageId) {
+                el.className = "nav-item flex flex-col items-center justify-center bg-sky-100 dark:bg-sky-900/40 text-sky-800 dark:text-sky-100 rounded-2xl px-5 py-2 transition-transform duration-150 cursor-pointer";
+                let icon = el.querySelector('span');
+                if(icon) icon.style.fontVariationSettings = "'FILL' 1";
+            } else {
+                let icon = el.querySelector('span');
+                if(icon) icon.style.fontVariationSettings = "'FILL' 0";
+            }
+        });
+
+        // Hide bottom nav if on verification camera or onboarding
+        if(pageId === 'verification_camera' || pageId === 'trust_score_breakdown' || pageId === 'onboarding') {
+            document.getElementById('bottom-nav').style.display = 'none';
+        } else {
+            document.getElementById('bottom-nav').style.display = 'flex';
+        }
+        window.scrollTo(0,0);
+    };
+
+    // Initialize with home
+    window.navigate('home_dashboard');
+
+    // Attach Demo interaction events
+    document.addEventListener("DOMContentLoaded", () => {
+        // Hero Dismiss Button
+        const heroBanner = document.querySelector("#home_dashboard .bg-primary-container\\/10");
+        if(heroBanner) {
+            let dismissBtn = heroBanner.querySelector("button");
+            // Turn it into "View Claim" instead of dismiss for our demo flow
+            if(dismissBtn) {
+                dismissBtn.innerText = "View Claim";
+                dismissBtn.onclick = () => window.navigate('claims_status');
+            }
+        }
+
+        // Trust Score -> Trust Breakdown
+        const trustCard = document.querySelector("#home_dashboard .relative.w-16.h-16");
+        if(trustCard && trustCard.parentElement && trustCard.parentElement.parentElement) {
+            trustCard.parentElement.parentElement.style.cursor = 'pointer';
+            trustCard.parentElement.parentElement.onclick = () => window.navigate('trust_score_breakdown');
+        }
+
+        // Action for Trust Breakdown Back
+        const tbHeader = document.querySelector("#trust_score_breakdown header span.material-symbols-outlined");
+        if(tbHeader) {
+            tbHeader.onclick = () => window.navigate('home_dashboard');
+        }
+
+        // Start Verification from Claims
+        const verificationStep = Array.from(document.querySelectorAll("#claims_status .relative.flex")).find(el => el.innerText.includes("Verification step"));
+        if(verificationStep) {
+            verificationStep.style.cursor = "pointer";
+            verificationStep.onclick = () => window.navigate('verification_camera');
+        }
+
+        // Start capture logic
+        const recordBtn = Array.from(document.querySelectorAll("#verification_camera button")).find(el => el.innerText.includes("Record Video"));
+        if(recordBtn) {
+            recordBtn.onclick = () => {
+                const analyzeDiv = document.querySelector("#verification_camera .bg-surface-container-low.rounded-xl.p-5");
+                if(analyzeDiv) {
+                    analyzeDiv.innerHTML = `<div class="flex justify-between items-center mb-4"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-green-600">check_circle</span><span class="font-headline font-bold text-sm text-on-surface">AI verifying... Approved</span></div></div>`;
+                }
+                setTimeout(() => {
+                    const statusCard = document.querySelector("#claims_status .bg-surface-container-lowest.rounded-\\[2rem\\]");
+                    if (statusCard) {
+                        statusCard.innerHTML = statusCard.innerHTML.replace("Processing", "Claim Approved");
+                    }
+                    window.navigate('claims_status');
+                }, 1500);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
