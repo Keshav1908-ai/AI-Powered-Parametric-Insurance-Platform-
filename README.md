@@ -1,6 +1,6 @@
-# RouteShield – Parametric Income Protection for Gig Workers
+# VayuGuard – Parametric Income Protection for Gig Workers
 
-RouteShield is a parametric micro-insurance platform designed for gig delivery workers whose income depends on daily activity and weekly incentives.  
+VayuGaurd is a parametric micro-insurance platform designed for gig delivery workers whose income depends on daily activity and weekly incentives.  
 During floods, cyclones, extreme heat, protests, or traffic shutdowns, workers may be unable to complete deliveries and lose a significant portion of their weekly earnings.
 
 Traditional insurance cannot verify this type of loss automatically and often requires manual claims, making it slow, expensive, and vulnerable to fraud.  
